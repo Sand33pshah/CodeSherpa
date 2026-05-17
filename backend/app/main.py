@@ -4,6 +4,8 @@ import shutil
 from app.services.scanner import extract_zip, scan_repository
 from app.services.reader import process_repository_files
 from app.services.chunker import chunk_repository
+from app.services.vector_store import store_chunks
+from app.services.retriver import retrieve_relevant_chunks
 
 app = FastAPI()
 
@@ -38,11 +40,25 @@ async def upload_zip(file: UploadFile = File(...)):
     # read content of scanned files
     processed_files = process_repository_files(scanned_files)
 
-    #Convert files into chunks
+    # Convert files into chunks
     chunks = chunk_repository(processed_files)
 
+    # Store chunks inside vector database
+    store_chunks(chunks)
+
     return {
-        "message": "Repository processed successfully",
-        "total_chunks": len(chunks),
-        "files": chunks[:5]
+        "message": "Repository embedded successfully",
+        "total_chunks": len(chunks)
+    }
+
+
+@app.post("/chat")
+async def chat(query: str):
+
+    # Retrive relevant repository chunks
+    results = retrieve_relevant_chunks(query)
+
+    return {
+        "query": query,
+        "result": results
     }

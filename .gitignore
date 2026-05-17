@@ -2,3 +2,5 @@ backend/venv/
 __pycache__/
 .env
 *.pyc
+backend/app/uploads/
+backend/chroma_db/
