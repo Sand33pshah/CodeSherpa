@@ -6,6 +6,7 @@ from app.services.reader import process_repository_files
 from app.services.chunker import chunk_repository
 from app.services.vector_store import store_chunks
 from app.services.retriver import retrieve_relevant_chunks
+from app.services.rag_services import generate_rag_response
 
 app = FastAPI()
 
@@ -55,10 +56,13 @@ async def upload_zip(file: UploadFile = File(...)):
 @app.post("/chat")
 async def chat(query: str):
 
-    # Retrive relevant repository chunks
-    results = retrieve_relevant_chunks(query)
+    # # Retrive relevant repository chunk\
+    # results = retrieve_relevant_chunks(query)
+
+    # Generate AI answer
+    response = generate_rag_response(query)
 
     return {
         "query": query,
-        "result": results
+        "response": response
     }
