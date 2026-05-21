@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 backend/app/uploads/
 backend/chroma_db/
+frontend/node_modules/

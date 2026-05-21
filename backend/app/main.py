@@ -7,8 +7,21 @@ from app.services.chunker import chunk_repository
 from app.services.vector_store import store_chunks
 from app.services.retriver import retrieve_relevant_chunks
 from app.services.rag_services import generate_rag_response
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+
+    allow_origins=["*"],
+
+    allow_credentials=True,
+
+    allow_methods=["*"],
+
+    allow_headers=["*"],
+)
 
 UPLOAD_DIR = "app/uploads"
 
