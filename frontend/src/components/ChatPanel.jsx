@@ -5,7 +5,7 @@ import API from "../services/api";
 function ChatPanel({ activeRepo }) {
 
   const [query, setQuery] = useState("");
-  const [response, setResponse] = useState("");
+  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   //Send question to backend
@@ -13,14 +13,37 @@ function ChatPanel({ activeRepo }) {
 
     if (!query.trim()) return;
 
+    //user message
+    const userMessage = {
+      role: "user",
+      content: query
+    };
+
+    setMessages((prev) => [
+      ...prev,
+      userMessage
+    ]);
+
     try {
       setLoading(true);
+      setQuery("");
 
       const result = await API.post(
         `/chat?query=${query}&repo_name=${activeRepo}`
       );
 
-      setResponse(result.data.response);
+      //AI Response
+      const aiMessage = {
+        role: "assistant",
+        content: result.data.response
+      };
+
+      setMessages((prev) => [
+        ...prev,
+        aiMessage
+      ]);
+
+      // setQuery("");
 
     } catch (error) {
 
@@ -40,13 +63,25 @@ function ChatPanel({ activeRepo }) {
       <h2 className="text-lg font-semibold mb-4">
         AI Chat
       </h2>
-      {/*AI Response */}
-      <div className="flex-1 bg-slate-800 rounded-xl p-4 text-slate-300 overflow-auto">
-        {loading ?
-          "Thinking..." : response || "Ask questions about your codebase..."
 
-        }
+      {/* Chat Messages */}
+      <div className="flex-1 bg-slate-800 rounded-xl p-4 overflow-auto space-y-4">
+        {messages.length === 0 && (
+          <p className="text-slate-400">Ask question about your codebase...</p>
+        )}
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`p-3 rounded-xl max-w-[80%] ${message.role === "user" ? "bg-orange-500 ml-auto text-white" : "bg-slate-700 text-slate-200"
+              }`}>
+            {message.content}
+          </div>
+        ))}
+        {loading && (
+          <p className="text-slate-400">Thinking...</p>
+        )}
       </div>
+
       {/* Input Area */}
       <div className="mt-4 flex gap-2">
         <input
