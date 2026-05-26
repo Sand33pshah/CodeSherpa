@@ -50,6 +50,7 @@ async def upload_zip(file: UploadFile = File(...)):
 
     # scan extracted repository
     scanned_files = scan_repository(extract_folder)
+    print(scanned_files)
 
     # read content of scanned files
     processed_files = process_repository_files(scanned_files)
