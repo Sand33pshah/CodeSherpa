@@ -5,10 +5,10 @@ from app.services.retriver import retrieve_relevant_chunks
 # Generate AI answer using retrieved context
 
 
-def generate_rag_response(query):
+def generate_rag_response(query, repo_name):
 
     # Retrieve relevant chunks
-    results = retrieve_relevant_chunks(query)
+    results = retrieve_relevant_chunks(query, repo_name)
 
     # Extract retrieved documents
     retrieved_docs = results["documents"][0]

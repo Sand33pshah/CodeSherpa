@@ -50,7 +50,7 @@ async def upload_zip(file: UploadFile = File(...)):
 
     # scan extracted repository
     scanned_files = scan_repository(extract_folder)
-    print(scanned_files)
+    # print(scanned_files)
 
     # read content of scanned files
     processed_files = process_repository_files(scanned_files)
@@ -59,7 +59,8 @@ async def upload_zip(file: UploadFile = File(...)):
     chunks = chunk_repository(processed_files)
 
     # Store chunks inside vector database
-    store_chunks(chunks)
+    repo_name = file.filename.replace(".zip", "")
+    store_chunks(chunks, repo_name)
 
     return {
         "message": "Repository embedded successfully",
@@ -68,13 +69,13 @@ async def upload_zip(file: UploadFile = File(...)):
 
 
 @app.post("/chat")
-async def chat(query: str):
+async def chat(query: str, repo_name: str):
 
     # # Retrive relevant repository chunk\
     # results = retrieve_relevant_chunks(query)
 
     # Generate AI answer
-    response = generate_rag_response(query)
+    response = generate_rag_response(query, repo_name)
 
     return {
         "query": query,

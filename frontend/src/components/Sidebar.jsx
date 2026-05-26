@@ -3,7 +3,7 @@ import API from "../services/api"
 
 
 
-function Sidebar() {
+function Sidebar({ setActiveRepo }) {
 
   const [loading, setLoading] = useState(false);
   const [repoData, setRepoData] = useState(null);
@@ -13,7 +13,10 @@ function Sidebar() {
 
     const file = event.target.files[0];
 
+
     if (!file) return;
+
+    setActiveRepo(file.name.replace(".zip", ""))
 
     const formData = new FormData();
 

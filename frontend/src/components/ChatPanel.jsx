@@ -2,7 +2,7 @@ import { useState } from "react";
 import API from "../services/api";
 
 
-function ChatPanel() {
+function ChatPanel({ activeRepo }) {
 
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
@@ -17,7 +17,7 @@ function ChatPanel() {
       setLoading(true);
 
       const result = await API.post(
-        `/chat?query=${query}`
+        `/chat?query=${query}&repo_name=${activeRepo}`
       );
 
       setResponse(result.data.response);
