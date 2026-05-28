@@ -3,7 +3,7 @@ import API from "../services/api"
 
 
 
-function Sidebar({ setActiveRepo }) {
+function Sidebar({ repos, setRepos, activeRepo, setActiveRepo }) {
 
   const [loading, setLoading] = useState(false);
   const [repoData, setRepoData] = useState(null);
@@ -16,7 +16,15 @@ function Sidebar({ setActiveRepo }) {
 
     if (!file) return;
 
-    setActiveRepo(file.name.replace(".zip", ""))
+    // setActiveRepo(file.name.replace(".zip", ""))
+    const cleanedRepoName = file.name.replace(".zip", "");
+
+    setActiveRepo(cleanedRepoName);
+
+    setRepos((prev) => [
+      ...prev,
+      cleanedRepoName
+    ]);
 
     const formData = new FormData();
 
@@ -64,6 +72,17 @@ function Sidebar({ setActiveRepo }) {
           </p>
         </div>
       )}
+      <div className="mt-4 space-y-2">
+        {repos.map((repo, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveRepo(repo)}
+            className={`w-full rounded-xl p-2 text-left transition ${activeRepo === repo ? "bg-orange-500 text-white" : "bg-slate-800 hover:bg-slate-700"}`}
+          >
+            {repo}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

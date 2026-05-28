@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function Home() {
   const [activeRepo, setActiveRepo] = useState("");
+  const [repos, setRepos] = useState([]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -17,7 +18,12 @@ function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 md:p-6">
 
         <div className="lg:col-span-3">
-          <Sidebar setActiveRepo={setActiveRepo} />
+          <Sidebar
+            repos={repos}
+            setRepos={setRepos}
+            activeRepo={activeRepo}
+            setActiveRepo={setActiveRepo}
+          />
         </div>
 
         <div className="lg:col-span-9">
