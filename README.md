@@ -1,6 +1,6 @@
 # 🏔️ CodeSherpa — AI Codebase Analyzer
 
-> Chat with any codebase using AI.
+> Navigate unfamiliar codebase with AI.
 
 CodeSherpa is a full-stack AI-powered repository analysis platform that uses **RAG**, **Vector Embeddings**, and **Local LLMs** to understand repositories semantically.
 
@@ -10,6 +10,10 @@ Built with:
 * React + TailwindCSS
 * Ollama + Mistral
 * ChromaDB
+
+---
+
+![CodeSherpa UI](./assets/output.png)
 
 ---
 
