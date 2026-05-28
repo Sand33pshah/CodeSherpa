@@ -1,77 +1,111 @@
-# CodeSherpa 🏔️
+# 🏔️ CodeSherpa — AI Codebase Analyzer
 
-> Your AI guide through unfamiliar codebases.
+> Chat with any codebase using AI.
 
-CodeSherpa is an AI-powered codebase analyzer that helps developers understand repositories faster using natural language, semantic search, and Retrieval-Augmented Generation (RAG).
+CodeSherpa is a full-stack AI-powered repository analysis platform that uses **RAG**, **Vector Embeddings**, and **Local LLMs** to understand repositories semantically.
 
-Upload a GitHub repository or ZIP file, and CodeSherpa will explore the terrain for you — scanning files, understanding architecture, and answering questions about the codebase like an AI pair programmer.
+Built with:
 
----
-
-## What Can It Do?
-
-- Upload repositories or ZIP files
-- Scan and process large codebases
-- Read and chunk source-code files
-- Perform semantic code search
-- Answer questions about repositories
-- Generate contextual AI responses
-- Help developers navigate unfamiliar projects
+* FastAPI
+* React + TailwindCSS
+* Ollama + Mistral
+* ChromaDB
 
 ---
 
-## Tech Stack
+# ✨ Features
 
-### Frontend
-- React
-- TailwindCSS
-
-### Backend
-- FastAPI
-- Python
-
-### AI & RAG
-- OpenAI API
-- LangChain / LlamaIndex
-- Embeddings Pipeline
-
-### Database
-- PostgreSQL
-
-### Vector Database
-- ChromaDB
-
-### Deployment
-- Docker
-- Azure *(planned)*
+* Upload GitHub repositories or ZIP files
+* AI-powered codebase chat
+* Semantic code search using vector embeddings
+* Multi-repository workspace
+* Repository-aware conversational UI
+* Fully local AI inference using Ollama
 
 ---
 
+# 🧠 Workflow
 
-## Project Vision
-
-Modern repositories can feel like mountains.
-
-CodeSherpa is being built to help developers climb them faster.
-
-Instead of manually searching through hundreds of files, developers can simply ask:
-
-> “Where is authentication handled?”  
-> “Explain the project architecture.”  
-> “Find API-related code.”  
-> “How does this system work?”
-
-CodeSherpa retrieves the relevant context and responds intelligently using AI-powered retrieval pipelines.
+```bash id="b7v2m4"
+Repository Upload
+    ↓
+Code Chunking
+    ↓
+Embedding Generation
+    ↓
+ChromaDB Vector Storage
+    ↓
+Semantic Retrieval
+    ↓
+LLM Response Generation
+```
 
 ---
 
-## Status
+# 🛠️ Tech Stack
 
-Currently under active development.
+## Frontend
 
-The goal is to evolve CodeSherpa into a production-style AI engineering project focused on:
-- scalable backend systems
-- AI infrastructure
-- RAG architecture
-- developer productivity tools
-- modern full-stack engineering
+* React
+* Vite
+* TailwindCSS
+
+## Backend
+
+* FastAPI
+* Python
+
+## AI / RAG
+
+* Ollama
+* Mistral
+* Sentence Transformers
+* ChromaDB
+
+---
+
+# 🚀 Run Locally
+
+## Backend
+
+```bash id="m2v8q1"
+cd backend
+
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload
+```
+
+## Frontend
+
+```bash id="p4m7x2"
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# ✅ Current MVP
+
+* Multi-repository AI chat
+* Repository context switching
+* Semantic retrieval pipeline
+* Conversational UI
+* Local LLM integration
+
+---
+
+# 🚧 Upcoming Features
+
+* Markdown rendering
+* Syntax highlighted code blocks
+* Streaming responses
+* Chat persistence
+* Deployment
